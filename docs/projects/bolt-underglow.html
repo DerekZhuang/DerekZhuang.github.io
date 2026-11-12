@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="../assets/css/site.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="site-head"><div class="in">
   <a class="brand" href="../index.html">Derek (Ziheng) Zhuang</a>
   <nav aria-label="Site">
@@ -21,7 +22,7 @@
     <a href="mailto:derekzhuang12345@gmail.com">Email</a>
   </nav>
 </div></header>
-<main>
+<main id="main">
 <article class="wrap">
 <div class="opener" id="schematic">
   <div class="opener-text">
@@ -36,13 +37,14 @@
     </div>
   </div>
   <figure id="fig-1">
-    <div class="im line"><a class="zoom" href="../assets/img/b_top.png"><img src="../assets/img/b_top.png" width="2400" height="1353" alt="Top-level schematic sheet showing six blocks"></a></div>
+    <div class="im line"><a class="zoom" href="../assets/img/b_top.webp"><img src="../assets/img/b_top.webp" srcset="../assets/img/b_top-800.webp 800w, ../assets/img/b_top-1200.webp 1200w, ../assets/img/b_top.webp 2400w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 640px" width="2400" height="1353" alt="Top-level schematic sheet showing six blocks"></a></div>
     <figcaption><b>Fig. 1</b>Top-level sheet, Oct 22: the six blocks of the board and the signals between them.</figcaption>
   </figure>
 </div>
 
 <div class="rev-wrap">
   <table class="rev">
+    <thead><tr><th scope="col">Revision</th><th scope="col">Date</th><th scope="col">What changed</th><th scope="col">Notes</th></tr></thead>
     <tr><td>Rev 1</td><td>Oct 20</td><td>First complete schematic: STM32G431 in a 32-pin package <a class="ref" href="#fig-2">Fig. 2</a>, two 5 V LED outputs with a fuse each, a CAN transceiver, 12 V input protection, and 5 V and 3.3 V regulators.</td><td>Debug signals were brought out as nets only, with no programming header.</td></tr>
     <tr><td>Rev 2</td><td>Oct 22</td><td>Moved to the 64-pin STM32C092RCT6 <a class="ref" href="#fig-3">Fig. 3</a> and added a 10-pin SWD header.</td><td>The team standardized on this part, so the same hardware can run different firmware. The header lets the board be programmed and debugged in place.</td></tr>
     <tr><td>Review</td><td>Oct 22, Oct 31</td><td>Reviewed with a senior BOLT member, before and after an AI-assisted check against the datasheets.</td><td>Found three problems, covered below.</td></tr>
@@ -52,11 +54,11 @@
 <div class="band">
   <div class="wrap grid grid-2 match" style="--a:2640fr; --b:3080fr;">
     <figure id="fig-2">
-      <div class="im"><a class="zoom" href="../assets/img/b_mcu1.png"><img loading="lazy" src="../assets/img/b_mcu1.png" width="2400" height="1821" alt="Rev 1 microcontroller schematic sheet with the STM32G431"></a></div>
+      <div class="im"><a class="zoom" href="../assets/img/b_mcu1.webp"><img loading="lazy" src="../assets/img/b_mcu1.webp" srcset="../assets/img/b_mcu1-800.webp 800w, ../assets/img/b_mcu1-1200.webp 1200w, ../assets/img/b_mcu1.webp 2400w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 640px" width="2400" height="1821" alt="Rev 1 microcontroller schematic sheet with the STM32G431"></a></div>
       <figcaption><b>Fig. 2</b>Rev 1, Oct 20: the microcontroller sheet with the STM32G431 (32-pin).</figcaption>
     </figure>
     <figure id="fig-3">
-      <div class="im"><a class="zoom" href="../assets/img/b_mcu2.png"><img loading="lazy" src="../assets/img/b_mcu2.png" width="2400" height="1904" alt="Rev 2 microcontroller schematic sheet with the STM32C092RCT6"></a></div>
+      <div class="im"><a class="zoom" href="../assets/img/b_mcu2.webp"><img loading="lazy" src="../assets/img/b_mcu2.webp" srcset="../assets/img/b_mcu2-800.webp 800w, ../assets/img/b_mcu2-1200.webp 1200w, ../assets/img/b_mcu2.webp 2400w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 640px" width="2400" height="1904" alt="Rev 2 microcontroller schematic sheet with the STM32C092RCT6"></a></div>
       <figcaption><b>Fig. 3</b>Rev 2, Oct 22: the STM32C092RCT6 (64-pin). Red crosses mark unused pins.</figcaption>
     </figure>
   </div>
@@ -67,7 +69,7 @@
 
 <div class="split">
   <figure id="fig-4">
-    <div class="im line"><a class="zoom" href="../assets/img/b_prot.png"><img loading="lazy" src="../assets/img/b_prot.png" width="1318" height="864" alt="12 V input protection schematic with fuse, TVS diode and reverse-polarity FET"></a>
+    <div class="im line"><a class="zoom" href="../assets/img/b_prot.webp"><img loading="lazy" src="../assets/img/b_prot.webp" srcset="../assets/img/b_prot-800.webp 800w, ../assets/img/b_prot.webp 1318w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 640px" width="1318" height="864" alt="12 V input protection schematic with fuse, TVS diode and reverse-polarity FET"></a>
       <svg class="mark" viewBox="0 0 988 648" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="642" cy="172" rx="78" ry="70" stroke-width="5"/><text x="722" y="272" font-size="44">1</text></svg>
     </div>
     <figcaption><b>Fig. 4</b>12 V input protection, Oct 22: fuse F1, TVS diode D1, and the reverse-polarity FET Q1.</figcaption>
@@ -79,7 +81,7 @@
 </div>
 
 <figure id="fig-5">
-  <div class="im line"><a class="zoom" href="../assets/img/b_buck.png"><img loading="lazy" src="../assets/img/b_buck.png" width="2400" height="1009" alt="12 V to 5 V buck converter schematic"></a>
+  <div class="im line"><a class="zoom" href="../assets/img/b_buck.webp"><img loading="lazy" src="../assets/img/b_buck.webp" srcset="../assets/img/b_buck-800.webp 800w, ../assets/img/b_buck-1200.webp 1200w, ../assets/img/b_buck.webp 2400w" sizes="(max-width: 1200px) 100vw, 1060px" width="2400" height="1009" alt="12 V to 5 V buck converter schematic"></a>
     <svg class="mark" viewBox="0 0 2794 1174" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="410" cy="562" rx="215" ry="85" stroke-width="7"/><text x="395" y="772" font-size="62">3</text></svg>
   </div>
   <figcaption><b>Fig. 5</b>12 V to 5 V buck converter, Oct 22 (U4 is an LMR51450), fed from the protected input.</figcaption>
@@ -100,7 +102,7 @@
 
 <div class="split wide-fig">
   <figure id="fig-6">
-    <div class="im"><a class="zoom" href="../assets/img/b_layout.jpg"><img loading="lazy" src="../assets/img/b_layout.jpg" width="1390" height="1389" alt="Routed four-layer PCB layout in Altium"></a></div>
+    <div class="im"><a class="zoom" href="../assets/img/b_layout.webp"><img loading="lazy" src="../assets/img/b_layout.webp" srcset="../assets/img/b_layout-800.webp 800w, ../assets/img/b_layout.webp 1390w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 640px" width="1390" height="1389" alt="Routed four-layer PCB layout in Altium"></a></div>
     <figcaption><b>Fig. 6</b>The routed board in Altium, Nov 6. Red is top copper, blue is the lower layers, and yellow is silkscreen.</figcaption>
   </figure>
   <div class="prose">

@@ -2,6 +2,10 @@
 // link simply opens the image file.
 (function () {
   if (!window.HTMLDialogElement) return;
+  // On a phone the viewer cannot show a figure any larger than the page
+  // already does, so there the link opens the full-size image instead,
+  // where it can be pinched and panned. Back returns to the page.
+  var phone = window.matchMedia("(max-width: 600px)");
   var dlg = document.createElement("dialog");
   dlg.className = "lb";
   dlg.setAttribute("aria-label", "Figure, enlarged");
@@ -12,7 +16,7 @@
 
   document.addEventListener("click", function (e) {
     var a = e.target.closest ? e.target.closest("a.zoom") : null;
-    if (!a) return;
+    if (!a || phone.matches) return;
     e.preventDefault();
     var small = a.querySelector("img");
     var fig = a.closest("figure");
@@ -21,7 +25,12 @@
     img.alt = small ? small.alt : "";
     var num = fc ? fc.querySelector("b") : null;
     cap.textContent = fc ? (num ? num.textContent + ". " + fc.textContent.slice(num.textContent.length) : fc.textContent) : "";
-    try { dlg.showModal(); } catch (err) { window.location.href = a.href; }
+    try {
+      dlg.showModal();
+      // keep the page behind the viewer from scrolling
+      document.documentElement.classList.add("viewing");
+    } catch (err) { window.location.href = a.href; }
   });
   dlg.addEventListener("click", function () { dlg.close(); });
+  dlg.addEventListener("close", function () { document.documentElement.classList.remove("viewing"); });
 })();

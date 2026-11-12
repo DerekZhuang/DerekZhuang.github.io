@@ -7,7 +7,12 @@ change titles, summaries or order, then run:  python3 build.py
 The order of PROJECTS is the order of the site. The first project is the
 one featured at the top of the home page, so moving a project to the top
 of the list makes it the lead.
+
+Figures: originals live in src/img/. After adding or replacing one, run
+make_images.py (needs Pillow) before build.py. Pages keep naming the
+original file (p1_wiring.jpg); the build points them at the WebP versions.
 """
+import json
 import re
 from pathlib import Path
 from html import escape
@@ -15,6 +20,11 @@ from html import escape
 ROOT = Path(__file__).parent
 SRC = ROOT / "src" / "projects"
 OUT = ROOT / "docs"
+IMAGES = json.loads((ROOT / "src" / "img" / "manifest.json").read_text(encoding="utf-8"))
+# How wide a figure is on screen, for choosing between the image sizes. A figure
+# that is shown wider than half the window carries its own sizes="..." in the page.
+DEFAULT_SIZES = "(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 640px"
+CLASS_YEAR = "class of 2029"
 
 NAME = "Derek (Ziheng) Zhuang"
 SHORT_NAME = "Derek Zhuang"
@@ -107,6 +117,7 @@ def page(title, body, depth, description, block_label, image=None, home=False):
 <link rel="stylesheet" href="{up}assets/css/site.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="site-head{' home' if home else ''}"><div class="in">{brand}
   <nav aria-label="Site">{all_projects}
     <a href="{PDF}">Portfolio PDF</a>
@@ -114,7 +125,7 @@ def page(title, body, depth, description, block_label, image=None, home=False):
     <a href="mailto:{EMAIL}">Email</a>
   </nav>
 </div></header>
-<main>
+<main id="main">
 {body}
 </main>
 <footer class="tb{' home-tb' if home else ''}"><div class="cells">
@@ -132,12 +143,15 @@ def card(p, feature=False):
     w, h = p["thumb_size"]
     cls = "thumb line" if p.get("thumb_line") else "thumb"
     pos = f' style="object-position:{p["thumb_pos"]};"' if feature else ""
-    lazy = "" if feature else ' loading="lazy"'
+    # The lead photo is the first thing on the home page, so it loads first and at full priority.
+    load = ' sizes="(max-width: 820px) 100vw, 58vw" fetchpriority="high"' if feature else ' loading="lazy"'
     extra = " feature" if feature else ""
+    # The lead project is a section of its own (h2); the rest sit under the "More projects" h2.
+    tag = "h2" if feature else "h3"
     return f"""<a class="project{extra}" href="projects/{p['slug']}.html">
-    <div class="{cls}"><img src="assets/img/{p['thumb']}" width="{w}" height="{h}" alt="{escape(p['thumb_alt'])}"{pos}{lazy}></div>
+    <div class="{cls}"><img src="assets/img/{p['thumb']}" width="{w}" height="{h}" alt="{escape(p['thumb_alt'])}"{pos}{load}></div>
     <div class="words">
-      <h2>{escape(p['title'])}</h2>
+      <{tag}>{escape(p['title'])}</{tag}>
       <div class="where">{escape(p['where'])}</div>
       <p class="sum">{escape(p['summary'])}</p>
     </div>
@@ -151,7 +165,7 @@ def build_home():
 <section class="hero">
   <div class="who">
     <h1 class="display">{NAME}</h1>
-    <p class="byline">Electrical engineering student at Virginia Tech, class of 2030</p>
+    <p class="byline">Electrical engineering student at Virginia Tech, {CLASS_YEAR}</p>
     <div class="prose"><p class="lead">{INTRO}</p></div>
     <div class="contact">
       <a href="mailto:{EMAIL}">{EMAIL}</a>
@@ -170,7 +184,7 @@ def build_home():
     desc = ("Engineering portfolio of Derek Zhuang, electrical engineering student at Virginia Tech: "
             "robot electrical systems, PCB design, and wire management.")
     html = page(NAME, body, 0, desc, "Index of projects", image=lead["thumb"], home=True)
-    (OUT / "index.html").write_text(html, encoding="utf-8")
+    (OUT / "index.html").write_text(web_images(html), encoding="utf-8")
 
 
 def link_figures(content):
@@ -183,6 +197,28 @@ def link_figures(content):
     content = "".join(out)
     return re.sub(r'<span class="ref">Fig\. (\d+)([^<]*)</span>',
                   r'<a class="ref" href="#fig-\1">Fig. \1\2</a>', content)
+
+
+def web_images(html):
+    """Point every figure at its WebP files and let the browser pick a size.
+
+    Pages name the original (assets/img/p1_wiring.jpg). This swaps in
+    p1_wiring.webp, adds the smaller versions listed in the manifest as a
+    srcset, and sends the viewer link to the full-size WebP.
+    """
+    def img(m):
+        before, path, stem, after = m.group(1), m.group(2), m.group(3), m.group(4)
+        info = IMAGES[stem]
+        attrs = before + after
+        out = f'<img{before}src="{path}{stem}.webp"'
+        if info["widths"]:
+            steps = [f'{path}{stem}-{w}.webp {w}w' for w in info["widths"]] + [f'{path}{stem}.webp {info["w"]}w']
+            out += f' srcset="{", ".join(steps)}"'
+            if "sizes=" not in attrs:
+                out += f' sizes="{DEFAULT_SIZES}"'
+        return out + after + ">"
+    html = re.sub(r'<img([^>]*?)src="((?:\.\./)?assets/img/)([\w-]+)\.(?:jpe?g|png)"([^>]*)>', img, html)
+    return re.sub(r'(<a class="zoom" href="(?:\.\./)?assets/img/[\w-]+)\.(?:jpe?g|png)"', r'\1.webp"', html)
 
 
 def build_projects():
@@ -216,7 +252,7 @@ def build_projects():
 {nav}
 </article>"""
         html = page(p["title"], body, 1, p["summary"], p["title"], image=p["thumb"])
-        (OUT / "projects" / f"{p['slug']}.html").write_text(html, encoding="utf-8")
+        (OUT / "projects" / f"{p['slug']}.html").write_text(web_images(html), encoding="utf-8")
 
 
 if __name__ == "__main__":
