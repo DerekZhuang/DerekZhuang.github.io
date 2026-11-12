@@ -151,7 +151,7 @@ def build_home():
 <section class="hero">
   <div class="who">
     <h1 class="display">{NAME}</h1>
-    <p class="byline">Electrical engineering student at Virginia Tech, class of 2030</p>
+    <p class="byline">Electrical engineering student at Virginia Tech, class of 2029</p>
     <div class="prose"><p class="lead">{INTRO}</p></div>
     <div class="contact">
       <a href="mailto:{EMAIL}">{EMAIL}</a>
