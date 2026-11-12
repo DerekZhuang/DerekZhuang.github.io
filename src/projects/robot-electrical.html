@@ -1,0 +1,25 @@
+<div class="opener">
+  <div class="opener-text">
+    <!--head-->
+    <div class="prose">
+      <p>I wired the robot with 12 AWG copper-clad aluminum (CCA) power wire to save weight and cost, since the team tends to run overweight. In 2025 we had to replace every power wire with oxygen-free copper at our final event and missed practice matches, so this time I checked the rules first. Game manual rule R622 counts CCA as copper wire. Motor circuits run through 40 A breakers, and the roboRIO, sensors, and small electronics sit on 10 A fuses. Most motors are Talon FX units with integrated controllers <span class="ref">Fig. 1</span>.</p>
+      <p>I split CAN into two buses. The swerve drivetrain runs on CAN FD through a CTRE CANivore, and every mechanism shares the roboRIO's CAN 2.0 bus. A fault in a mechanism cannot take down the drivetrain, and the split keeps the roboRIO bus from overloading and stuttering.</p>
+    </div>
+  </div>
+  <figure class="bleed-r">
+    <div class="im"><a class="zoom" href="../assets/img/p1_wiring.jpg"><img src="../assets/img/p1_wiring.jpg" width="1520" height="1430" alt="Underside of the 2026 robot showing the wiring, power distribution hub, fuse panels and swerve motors"></a></div>
+    <figcaption><b>Fig. 1</b>The underside of the 2026 robot as wired, with the power distribution hub, fuse panels, and Talon FX swerve motors.</figcaption>
+  </figure>
+</div>
+
+<div class="split">
+  <figure>
+    <div class="im"><a class="zoom" href="../assets/img/p1_cad_top.jpg"><img src="../assets/img/p1_cad_top.jpg" width="1145" height="949" alt="CAD bottom view of the lattice belly pan with electronics placed" loading="lazy"></a></div>
+    <figcaption><b>Fig. 2</b>Bottom view in CAD of my lattice belly pan, with the electronics placed before any wiring.</figcaption>
+  </figure>
+  <div class="prose">
+    <p>The split paid off at our second competition. Between events the team rebuilt the intake from a linear-actuated chain-and-sprocket design to a spring-actuated one. In the new layout a jacketed CAN wire was crushed and broke inside while the jacket still looked fine. In one match the mechanism bus went down, the drivetrain stayed up on its own bus, and we played defense.</p>
+    <p>Since then I stress-test every component after any change and no longer trust a wire because its jacket looks intact.</p>
+    <p>The belly pan layout <span class="ref">Fig. 2</span> builds on my first one, from the 2025 offseason: <a href="belly-pans.html">Belly pans: where the electronics live</a>.</p>
+  </div>
+</div>

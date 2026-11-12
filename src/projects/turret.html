@@ -1,0 +1,86 @@
+<div class="rev-wrap">
+  <table class="rev">
+    <tr><td>Concept</td><td>Nov to Dec 2025</td><td>Bidirectional energy chain routing worked out in CAD on a test plate.</td><td>Led to the V1 design.</td></tr>
+    <tr><td>V1</td><td>Feb 2026</td><td>Printed PETG arc tracks, caps, and channel block, with an energy chain and a constant-force spring pulley.</td><td>Cracked repeatedly in collision practice, and the chain hit the climber's roller chain.</td></tr>
+    <tr><td>V2</td><td>Before the first competition</td><td>Laser-cut SRPP channel on aluminum standoffs, a cable sleeve in place of the chain, and the spring repositioned.</td><td>Ran all 28 official 2026 matches without a repair.</td></tr>
+  </table>
+</div>
+
+<div class="split" id="concept">
+  <div class="prose">
+    <p>The 2026 turret rotates about 400° in both directions, and every power and CAN wire to the shooter has to follow it without snagging, pinching, or flying loose.</p>
+    <p>During the fall 2025 offseason I studied how other teams route wires through turrets, then worked out bidirectional energy chain routing in CAD on a test plate <span class="ref">Fig. 1</span>.</p>
+  </div>
+  <figure>
+    <div class="im"><a class="zoom" href="../assets/img/t_concept.jpg"><img src="../assets/img/t_concept.jpg" width="1004" height="990" alt="CAD of bidirectional energy chain routing on a test plate"></a></div>
+    <figcaption><b>Fig. 1</b>Bidirectional energy chain routing on an offseason test plate, Nov 17, 2025.</figcaption>
+  </figure>
+</div>
+
+<h2 class="display" id="v1">V1</h2>
+<div class="split">
+  <figure>
+    <div class="im"><a class="zoom" href="../assets/img/t_v1assm.jpg"><img src="../assets/img/t_v1assm.jpg" width="1126" height="946" alt="V1 routing parts on the turret ring in CAD"></a></div>
+    <figcaption><b>Fig. 2</b>My V1 routing parts (arc tracks and blocks) on the turret ring. The turret structure is from the team model. Feb 28.</figcaption>
+  </figure>
+  <div class="prose">
+    <p>For V1 I designed arc guide tracks that carry the energy chain around the turret ring, plus caps and a channel block that form a pulley system with a constant-force spring. The spring keeps the chain under tension through the whole rotation so the wires cannot fly loose <span class="ref">Fig. 2</span>.</p>
+    <p>I printed every V1 part in PETG on my Bambu Lab A1 and revised parts like the caps as the design came together <span class="ref">Fig. 3 to 6</span>.</p>
+  </div>
+</div>
+
+<div class="grid grid-4">
+  <figure>
+    <div class="im fit"><img src="../assets/img/t_capv1.jpg" width="1100" height="810" alt="Cap, first version" loading="lazy"></div>
+    <figcaption><b>Fig. 3</b>Cap, first version.</figcaption>
+  </figure>
+  <figure>
+    <div class="im fit"><img src="../assets/img/t_capv2.jpg" width="570" height="450" alt="Cap, revised" loading="lazy"></div>
+    <figcaption><b>Fig. 4</b>Cap, revised, Feb 10.</figcaption>
+  </figure>
+  <figure>
+    <div class="im fit" style="background:#dce7ee;"><img src="../assets/img/t_block.jpg" width="680" height="390" alt="Channel block" loading="lazy"></div>
+    <figcaption><b>Fig. 5</b>Channel block, Feb 16.</figcaption>
+  </figure>
+  <figure>
+    <div class="im fit"><img src="../assets/img/p2_arc.jpg" width="1267" height="580" alt="Arc guide track profile" loading="lazy"></div>
+    <figcaption><b>Fig. 6</b>Arc guide track profile, Feb 28.</figcaption>
+  </figure>
+</div>
+
+<h2 class="display" id="v2">Why V2 replaced V1</h2>
+<p class="byline">V1 failed in practice, and V2 ran at both 2026 competitions.</p>
+
+<div class="grid grid-2 match" style="--a:1.174fr; --b:0.867fr;">
+  <figure>
+    <div class="im"><a class="zoom" href="../assets/img/p2_v1.jpg"><img src="../assets/img/p2_v1.jpg" width="1350" height="1150" alt="V1 as built on the turret" loading="lazy"></a></div>
+    <figcaption><b>Fig. 7</b>V1 as built: printed tracks and energy chain wrapped around the turret.</figcaption>
+  </figure>
+  <figure>
+    <div class="im"><a class="zoom" href="../assets/img/p2_interf.jpg"><img src="../assets/img/p2_interf.jpg" width="1179" height="1360" alt="Energy chain meeting the climber roller chain" loading="lazy"></a></div>
+    <figcaption><b>Fig. 8</b>Rotating the turret by hand during testing: the energy chain meets the climber's roller chain.</figcaption>
+  </figure>
+</div>
+
+<div class="split">
+  <div class="prose">
+    <p>In practice sessions that simulated match play, including collisions with other robots, the printed track and retainer cracked again and again <span class="ref">Fig. 7</span>. The energy chain also hit the roller chain that drives the climber, a second subsystem my routing had to share space with <span class="ref">Fig. 8</span>.</p>
+    <p>I went the opposite direction from a stronger print. I replaced the printed parts with a laser-cut SRPP channel on aluminum standoffs and swapped the energy chain for a cable sleeve <span class="ref">Fig. 9</span>. The sleeve has none of the chain's 0.75 × 0.75 in footprint, which cleared the climber chain. I kept the constant-force spring but moved it so it holds tension at all times and the routing cannot swing around.</p>
+    <p>V2 ran at both 2026 competitions <span class="ref">Fig. 10 and 11</span>. I would rather have a part that cannot break mid-match and block the shot than a stronger part that still might.</p>
+  </div>
+  <figure>
+    <div class="im"><a class="zoom" href="../assets/img/p2_assm.jpg"><img src="../assets/img/p2_assm.jpg" width="1600" height="808" alt="V2 SRPP channel in the final robot assembly" loading="lazy"></a></div>
+    <figcaption><b>Fig. 9</b>V2 SRPP channel in the final 2026 assembly (team model). Parts that were prototyped and built directly are not modeled.</figcaption>
+  </figure>
+</div>
+
+<div class="grid grid-2 match" style="--a:1.315fr; --b:1.115fr;">
+  <figure>
+    <div class="im"><a class="zoom" href="../assets/img/p2_v2.jpg"><img src="../assets/img/p2_v2.jpg" width="1500" height="1141" alt="V2 SRPP channel on standoffs with cable sleeve" loading="lazy"></a></div>
+    <figcaption><b>Fig. 10</b>V2: SRPP channel on standoffs, with the cable sleeve.</figcaption>
+  </figure>
+  <figure>
+    <div class="im"><a class="zoom" href="../assets/img/p2_comp.jpg"><img src="../assets/img/p2_comp.jpg" width="870" height="780" alt="V2 on the robot at the second 2026 competition" loading="lazy"></a></div>
+    <figcaption><b>Fig. 11</b>V2 on the robot at our second 2026 competition.</figcaption>
+  </figure>
+</div>

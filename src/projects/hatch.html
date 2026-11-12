@@ -1,0 +1,17 @@
+<figure>
+  <div class="im line"><a class="zoom" href="../assets/img/h_intake.jpg"><img src="../assets/img/h_intake.jpg" width="1600" height="887" alt="Hatch intake page with the AI assistant turning a task description into a brief"></a></div>
+  <figcaption><b>Fig. 1</b>Intake page: a client describes a task in plain words and the AI assistant turns it into a structured brief. Running locally with demo data.</figcaption>
+</figure>
+
+<div class="split">
+  <div class="prose">
+    <p>Hatch is a two-sided marketplace where clients post tasks (“hatches”) and operators claim and complete them <span class="ref">Fig. 2</span>. My friend started the project and its first frontend. I took over development, built the backend, and added messaging and the full hatch lifecycle.</p>
+    <p>The server is Node.js on SQLite, using the built-in <em>node:sqlite</em> module with no external npm dependencies, and the schema has 14 tables with foreign keys. The hatch lifecycle (open, claimed, in progress, submitted, completed, plus disputed and cancelled) is enforced twice, by a database trigger and by the API's transition logic, so an illegal state change is rejected even if a bug gets past the API.</p>
+    <p>The intake assistant <span class="ref">Fig. 1</span> calls DeepSeek or Groq from the server and never from the browser. It is rate-limited to 30 requests per 5 minutes per IP and falls back to a local rule-based brief generator when the provider is unreachable.</p>
+    <p>I also split an 8,861-line two-file frontend into 18 focused modules, one commit per module, leaving 533 lines in the original files.</p>
+  </div>
+  <figure>
+    <div class="im line"><a class="zoom" href="../assets/img/h_browse.jpg"><img src="../assets/img/h_browse.jpg" width="1600" height="887" alt="Hatch browse board with filters" loading="lazy"></a></div>
+    <figcaption><b>Fig. 2</b>Browse board with level, price, and length filters. Demo listings.</figcaption>
+  </figure>
+</div>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BOLT under-glow controller board | Derek (Ziheng) Zhuang</title>
+<meta name="description" content="An LED controller board on the bike&#x27;s CAN bus: two schematic revisions, a design review that found three problems, and a four-layer layout routed to zero design rule violations. Fabrication is planned for the end of November.">
+<meta property="og:title" content="BOLT under-glow controller board | Derek (Ziheng) Zhuang">
+<meta property="og:description" content="An LED controller board on the bike&#x27;s CAN bus: two schematic revisions, a design review that found three problems, and a four-layer layout routed to zero design rule violations. Fabrication is planned for the end of November.">
+<meta property="og:image" content="https://derekzhuang.github.io/assets/img/b_layout.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<header class="site-head"><div class="in">
+  <a class="brand" href="../index.html">Derek (Ziheng) Zhuang</a>
+  <nav aria-label="Site">
+    <a href="../index.html">All projects</a>
+    <a href="https://drive.google.com/file/d/1knBHxL6q7wfWigkeNkA8Oi-ZfvWAPpQj/view">Portfolio PDF</a>
+    <a href="https://www.linkedin.com/in/derek-zhuang-6246352b1">LinkedIn</a>
+    <a href="mailto:derekzhuang12345@gmail.com">Email</a>
+  </nav>
+</div></header>
+<main>
+<article class="wrap">
+<div class="opener" id="schematic">
+  <div class="opener-text">
+    <header class="page-head">
+  <h1 class="display">BOLT under-glow controller board</h1>
+  <p class="byline">BOLT Controls, Virginia Tech's electric motorcycle team. Project started in October 2026, with the schematic and PCB layout done in Altium Designer.</p>
+  <nav class="onpage" aria-label="On this page"><span>On this page</span><a href="#schematic">Schematic</a><a href="#review">Design review</a><a href="#layout">PCB layout</a></nav>
+</header>
+    <div class="prose">
+      <p>On BOLT's Controls subteam I took on the under-glow board, which drives addressable LED strips on the bike and connects to its CAN bus. It extends the RGB lighting work I did for my dorm. My first Altium board was a guided 7-segment display tutorial that was never fabricated.</p>
+      <p>I drew the power regulation and microcontroller sheets, and the top-level sheet splits the board into six blocks <a class="ref" href="#fig-1">Fig. 1</a>. BOLT did not set a tight size limit because the bike has open space, so I put repairability and easy integration ahead of minimum size.</p>
+    </div>
+  </div>
+  <figure id="fig-1">
+    <div class="im line"><a class="zoom" href="../assets/img/b_top.png"><img src="../assets/img/b_top.png" width="2400" height="1353" alt="Top-level schematic sheet showing six blocks"></a></div>
+    <figcaption><b>Fig. 1</b>Top-level sheet, Oct 22: the six blocks of the board and the signals between them.</figcaption>
+  </figure>
+</div>
+
+<div class="rev-wrap">
+  <table class="rev">
+    <tr><td>Rev 1</td><td>Oct 20</td><td>First complete schematic: STM32G431 in a 32-pin package <a class="ref" href="#fig-2">Fig. 2</a>, two 5 V LED outputs with a fuse each, a CAN transceiver, 12 V input protection, and 5 V and 3.3 V regulators.</td><td>Debug signals were brought out as nets only, with no programming header.</td></tr>
+    <tr><td>Rev 2</td><td>Oct 22</td><td>Moved to the 64-pin STM32C092RCT6 <a class="ref" href="#fig-3">Fig. 3</a> and added a 10-pin SWD header.</td><td>The team standardized on this part, so the same hardware can run different firmware. The header lets the board be programmed and debugged in place.</td></tr>
+    <tr><td>Review</td><td>Oct 22, Oct 31</td><td>Reviewed with a senior BOLT member, before and after an AI-assisted check against the datasheets.</td><td>Found three problems, covered below.</td></tr>
+  </table>
+</div>
+
+<div class="band">
+  <div class="wrap grid grid-2 match" style="--a:2640fr; --b:3080fr;">
+    <figure id="fig-2">
+      <div class="im"><a class="zoom" href="../assets/img/b_mcu1.png"><img loading="lazy" src="../assets/img/b_mcu1.png" width="2400" height="1821" alt="Rev 1 microcontroller schematic sheet with the STM32G431"></a></div>
+      <figcaption><b>Fig. 2</b>Rev 1, Oct 20: the microcontroller sheet with the STM32G431 (32-pin).</figcaption>
+    </figure>
+    <figure id="fig-3">
+      <div class="im"><a class="zoom" href="../assets/img/b_mcu2.png"><img loading="lazy" src="../assets/img/b_mcu2.png" width="2400" height="1904" alt="Rev 2 microcontroller schematic sheet with the STM32C092RCT6"></a></div>
+      <figcaption><b>Fig. 3</b>Rev 2, Oct 22: the STM32C092RCT6 (64-pin). Red crosses mark unused pins.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<h2 class="display" id="review">Design review</h2>
+<p class="byline">The Oct 22 power stage, rechecked on Oct 31. A senior BOLT member reviewed it with me before and after an AI-assisted datasheet check. I made the fixes myself.</p>
+
+<div class="split">
+  <figure id="fig-4">
+    <div class="im line"><a class="zoom" href="../assets/img/b_prot.png"><img loading="lazy" src="../assets/img/b_prot.png" width="1318" height="864" alt="12 V input protection schematic with fuse, TVS diode and reverse-polarity FET"></a>
+      <svg class="mark" viewBox="0 0 988 648" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="642" cy="172" rx="78" ry="70" stroke-width="5"/><text x="722" y="272" font-size="44">1</text></svg>
+    </div>
+    <figcaption><b>Fig. 4</b>12 V input protection, Oct 22: fuse F1, TVS diode D1, and the reverse-polarity FET Q1.</figcaption>
+  </figure>
+  <div class="prose">
+    <p><b>1. Q1 gate.</b> Q1 is a P-channel FET that blocks reverse polarity, with its gate tied to ground <a class="ref" href="#fig-4">Fig. 4</a>. The TVS diode can let the input reach 29.2 V before it clamps, but the NVTFS5116PL's gate-to-source rating is ±20 V, so a surge could destroy the FET. I added a Zener to limit the gate voltage.</p>
+    <p><b>2. 12 V strips.</b> On Oct 29 I added a 12 V output option with two more strip outputs. The first version powered them from the unprotected input, so the fuse, reverse-polarity FET, and TVS did not cover them. I moved them onto the protected +12V_IN net.</p>
+  </div>
+</div>
+
+<figure id="fig-5">
+  <div class="im line"><a class="zoom" href="../assets/img/b_buck.png"><img loading="lazy" src="../assets/img/b_buck.png" width="2400" height="1009" alt="12 V to 5 V buck converter schematic"></a>
+    <svg class="mark" viewBox="0 0 2794 1174" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="410" cy="562" rx="215" ry="85" stroke-width="7"/><text x="395" y="772" font-size="62">3</text></svg>
+  </div>
+  <figcaption><b>Fig. 5</b>12 V to 5 V buck converter, Oct 22 (U4 is an LMR51450), fed from the protected input.</figcaption>
+</figure>
+
+<div class="split">
+  <div class="prose">
+    <p><b>3. Buck input capacitance.</b> U4's input had only C7 (4.7 µF) and C8 (100 nF) <a class="ref" href="#fig-5">Fig. 5</a>. TI's datasheet recommends 10 µF or more of input decoupling, rated for twice the maximum input voltage to allow for ceramic derating, so one 4.7 µF part at 12 V gave too little. I added input capacitance.</p>
+  </div>
+  <div class="prose">
+    <p><b>Still open.</b> The LED data lines run straight from the 3.3 V microcontroller to the strips with no level shifter, which I still need to confirm on the real strips.</p>
+    <p><b>Status.</b> All three fixes are in the schematic, and I routed the board myself in Altium.</p>
+  </div>
+</div>
+
+<h2 class="display" id="layout">PCB layout</h2>
+<p class="byline">Routed by me in Altium Designer from the corrected schematic. Finished Nov 6, 2026 with zero design rule violations.</p>
+
+<div class="split wide-fig">
+  <figure id="fig-6">
+    <div class="im"><a class="zoom" href="../assets/img/b_layout.jpg"><img loading="lazy" src="../assets/img/b_layout.jpg" width="1390" height="1389" alt="Routed four-layer PCB layout in Altium"></a></div>
+    <figcaption><b>Fig. 6</b>The routed board in Altium, Nov 6. Red is top copper, blue is the lower layers, and yellow is silkscreen.</figcaption>
+  </figure>
+  <div class="prose">
+    <p class="lead">Four layers, 2.8 by 2.8 in, with all 50 parts on the top side.</p>
+    <p>Signals run on the top and bottom layers, with a ground layer and a power layer between them.</p>
+    <p>Power enters along the top edge, where the input protection and the buck converter sit. The STM32 is in the middle. The two CAN connectors are on the left edge, the two 12 V LED outputs on the right, and the two 5 V outputs along the bottom <a class="ref" href="#fig-6">Fig. 6</a>.</p>
+  </div>
+</div>
+
+<div class="split">
+  <div class="prose">
+    <p><b>Checks before ordering.</b> On Nov 5 the design rule check still reported 153 violations, and I worked them down to zero. A final review before ordering, again AI-assisted, caught that the board title and output labels were on the top copper layer instead of silkscreen. Under solder mask they would have been nearly invisible, and the copper lettering sat close to signal traces, so I moved it to silkscreen.</p>
+  </div>
+  <div class="prose">
+    <p>I also added a 15 mil board outline clearance rule to keep copper away from the edge. To be sure the rule was actually running, I set it to 200 mil first and got 70 violations, then set it back to 15 mil and reran the check to zero.</p>
+    <p><b>Next.</b> Check every layer of the Gerbers in the fabricator's viewer before ordering. Fabrication is planned for the end of November, with installation on the bike in early December. After that comes the wheel speed board, which reuses this base and adds Hall effect sensors, microSD logging, and CAN readings.</p>
+  </div>
+</div>
+
+<nav class="next" aria-label="More projects"><div><span>Previous</span><a href="robot-electrical.html">2026 robot electrical system</a></div><div class="fwd"><span>Next</span><a href="turret.html">Turret wire management</a></div></nav>
+</article>
+</main>
+<footer class="tb"><div class="cells">
+  <span><b>Derek Zhuang</b>Engineering portfolio</span>
+  <span>BOLT under-glow controller board</span>
+  <span>Updated Nov 2026. <a href="https://drive.google.com/file/d/1knBHxL6q7wfWigkeNkA8Oi-ZfvWAPpQj/view">PDF version</a></span>
+</div></footer>
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>
