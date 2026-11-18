@@ -25,6 +25,8 @@ IMAGES = json.loads((ROOT / "src" / "img" / "manifest.json").read_text(encoding=
 # that is shown wider than half the window carries its own sizes="..." in the page.
 DEFAULT_SIZES = "(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 640px"
 CLASS_YEAR = "class of 2029"
+# Home page sections, in order. Each project names its group in PROJECTS.
+GROUPS = [("robotics", "Robotics"), ("other", "Other"), ("boards", "Boards")]
 
 NAME = "Derek (Ziheng) Zhuang"
 SHORT_NAME = "Derek Zhuang"
@@ -38,6 +40,7 @@ SITE_URL = "https://derekzhuang.github.io"
 
 PROJECTS = [
     {
+        "group": "Robotics",
         "slug": "robot-electrical",
         "title": "2026 robot electrical system",
         "where": "FRC Team 6560, 2026 season",
@@ -47,16 +50,7 @@ PROJECTS = [
         "thumb_alt": "Underside of the 2026 robot with its wiring, power distribution hub and fuse panels",
     },
     {
-        "slug": "bolt-underglow",
-        "title": "BOLT under-glow controller board",
-        "where": "BOLT at Virginia Tech, started October 2026",
-        "byline": "BOLT Controls, Virginia Tech's electric motorcycle team. Project started in October 2026, with the schematic and PCB layout done in Altium Designer.",
-        "summary": "An LED controller board on the bike's CAN bus: two schematic revisions, a design review that found three problems, and a four-layer layout routed to zero design rule violations. Fabrication is planned for the end of November. A second board, for wheel speed sensing, has its first layout done.",
-        "thumb": "b_layout.jpg", "thumb_size": (1390, 1389), "thumb_pos": "50% 50%",
-        "thumb_alt": "Routed four-layer PCB layout of the under-glow board",
-        "sections": [("schematic", "Schematic"), ("review", "Design review"), ("layout", "PCB layout"), ("wheel-speed", "Wheel speed board")],
-    },
-    {
+        "group": "Robotics",
         "slug": "turret",
         "title": "Turret wire management",
         "where": "FRC Team 6560, fall 2025 through the 2026 season",
@@ -67,6 +61,7 @@ PROJECTS = [
         "sections": [("concept", "Concept"), ("v1", "V1"), ("v2", "Why V2 replaced V1")],
     },
     {
+        "group": "Robotics",
         "slug": "belly-pans",
         "title": "Belly pans: where the electronics live",
         "where": "FRC Team 6560, 2025 offseason",
@@ -76,6 +71,7 @@ PROJECTS = [
         "thumb_alt": "Belly pan with electronics in the full robot CAD model",
     },
     {
+        "group": "Other",
         "slug": "hatch",
         "title": "Hatch, a full-stack marketplace",
         "where": "A friend's startup, July to August 2026",
@@ -85,6 +81,27 @@ PROJECTS = [
         "thumb": "h_intake.jpg", "thumb_size": (1600, 887), "thumb_pos": "50% 0%", "thumb_line": True,
         "thumb_alt": "Hatch intake page",
     },
+    {
+        "group": "Boards",
+        "slug": "bolt-underglow",
+        "title": "BOLT under-glow controller board",
+        "where": "BOLT at Virginia Tech, started October 2026",
+        "byline": "BOLT Controls, Virginia Tech's electric motorcycle team. Project started in October 2026, with the schematic and PCB layout done in Altium Designer.",
+        "summary": "An LED controller board on the bike's CAN bus: two schematic revisions, a design review that found three problems, and a four-layer layout routed to zero design rule violations. Fabrication is planned for the end of November.",
+        "thumb": "b_layout.jpg", "thumb_size": (1390, 1389), "thumb_pos": "50% 50%",
+        "thumb_alt": "Routed four-layer PCB layout of the under-glow board",
+        "sections": [("schematic", "Schematic"), ("review", "Design review"), ("layout", "PCB layout")],
+    },
+    {
+        "group": "Boards",
+        "slug": "bolt-wheel-speed",
+        "title": "BOLT wheel speed sensor board",
+        "where": "BOLT at Virginia Tech, started October 2026",
+        "byline": "BOLT Controls, Virginia Tech's electric motorcycle team. Project started in October 2026, with the schematic and PCB layout done in Altium Designer.",
+        "summary": "A second CAN board for the bike, built on the under-glow board's base: it reads a Hall effect wheel speed sensor and reports over CAN. Rev 1 is a fully routed two-layer, 1.9 in square board.",
+        "thumb": "w_board.jpg", "thumb_size": (940, 978), "thumb_pos": "50% 50%", "thumb_line": True,
+        "thumb_alt": "3D view of the routed wheel speed board",
+    },
 ]
 
 INTRO = (
@@ -92,7 +109,7 @@ INTRO = (
     "electronics go. I was Electrical Lead on FRC Team 6560 for 2025-26 and now mentor the team. I also drive and "
     "run electrical and battery systems for an H2GP hydrogen fuel-cell race car. On the Controls subteam at BOLT, "
     "Virginia Tech's electric motorcycle team, I am designing an "
-    '<a href="projects/bolt-underglow.html">LED controller board</a> and a <a href="projects/bolt-underglow.html#wheel-speed">wheel speed sensor board</a>, and I am working toward PCB and chip design.'
+    '<a href="projects/bolt-underglow.html">LED controller board</a> and a <a href="projects/bolt-wheel-speed.html">wheel speed sensor board</a>, and I am working toward PCB and chip design.'
 )
 
 
@@ -146,7 +163,7 @@ def card(p, feature=False):
     # The lead photo is the first thing on the home page, so it loads first and at full priority.
     load = ' sizes="(max-width: 820px) 100vw, 58vw" fetchpriority="high"' if feature else ' loading="lazy"'
     extra = " feature" if feature else ""
-    # The lead project is a section of its own (h2); the rest sit under the "More projects" h2.
+    # The lead project is a section of its own (h2); the rest sit under their group's h2.
     tag = "h2" if feature else "h3"
     return f"""<a class="project{extra}" href="projects/{p['slug']}.html">
     <div class="{cls}"><img src="assets/img/{p['thumb']}" width="{w}" height="{h}" alt="{escape(p['thumb_alt'])}"{pos}{load}></div>
@@ -160,7 +177,19 @@ def card(p, feature=False):
 
 def build_home():
     lead, rest = PROJECTS[0], PROJECTS[1:]
-    items = "\n".join(f"  <li>{card(p)}</li>" for p in rest)
+    sections = []
+    for gid, label in GROUPS:
+        members = [p for p in rest if p["group"] == label]
+        if not members:
+            continue
+        items = "\n".join(f"  <li>{card(p)}</li>" for p in members)
+        sections.append(f"""<section class="more" id="{gid}">
+  <h2>{escape(label)}</h2>
+  <ul class="work">
+{items}
+  </ul>
+</section>""")
+    groups_html = "\n".join(sections)
     body = f"""<div class="wrap">
 <section class="hero">
   <div class="who">
@@ -174,12 +203,7 @@ def build_home():
   </div>
   {card(lead, feature=True)}
 </section>
-<section class="more" id="projects">
-  <h2>More projects</h2>
-  <ul class="work">
-{items}
-  </ul>
-</section>
+{groups_html}
 </div>"""
     desc = ("Engineering portfolio of Derek Zhuang, electrical engineering student at Virginia Tech: "
             "robot electrical systems, PCB design, and wire management.")

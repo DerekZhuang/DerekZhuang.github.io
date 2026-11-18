@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BOLT wheel speed sensor board | Derek (Ziheng) Zhuang</title>
+<meta name="description" content="A second CAN board for the bike, built on the under-glow board&#x27;s base: it reads a Hall effect wheel speed sensor and reports over CAN. Rev 1 is a fully routed two-layer, 1.9 in square board.">
+<meta property="og:title" content="BOLT wheel speed sensor board | Derek (Ziheng) Zhuang">
+<meta property="og:description" content="A second CAN board for the bike, built on the under-glow board&#x27;s base: it reads a Hall effect wheel speed sensor and reports over CAN. Rev 1 is a fully routed two-layer, 1.9 in square board.">
+<meta property="og:image" content="https://derekzhuang.github.io/assets/img/w_board.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head"><div class="in">
+  <a class="brand" href="../index.html">Derek (Ziheng) Zhuang</a>
+  <nav aria-label="Site">
+    <a href="../index.html">All projects</a>
+    <a href="https://drive.google.com/file/d/1knBHxL6q7wfWigkeNkA8Oi-ZfvWAPpQj/view">Portfolio PDF</a>
+    <a href="https://www.linkedin.com/in/derek-zhuang-6246352b1">LinkedIn</a>
+    <a href="mailto:derekzhuang12345@gmail.com">Email</a>
+  </nav>
+</div></header>
+<main id="main">
+<article class="wrap">
+<div class="opener" id="board">
+  <div class="opener-text">
+    <header class="page-head">
+  <h1 class="display">BOLT wheel speed sensor board</h1>
+  <p class="byline">BOLT Controls, Virginia Tech's electric motorcycle team. Project started in October 2026, with the schematic and PCB layout done in Altium Designer.</p>
+</header>
+    <div class="prose">
+      <p>My second board on BOLT's Controls subteam. It reads a Hall effect wheel speed sensor and puts the readings on the bike's CAN bus.</p>
+      <p>It is built on the same base as the <a href="bolt-underglow.html">under-glow board</a>, with the same STM32C092RCT6 microcontroller and the power and microcontroller sheets I drew for that board. Rev 1 is fully routed <a class="ref" href="#fig-1">Fig. 1</a>.</p>
+    </div>
+  </div>
+  <figure id="fig-1">
+    <div class="im line"><a class="zoom" href="../assets/img/w_board.webp"><img src="../assets/img/w_board.webp" width="940" height="978" alt="3D view of the routed two-layer wheel speed board in Altium"></a></div>
+    <figcaption><b>Fig. 1</b>Rev 1 in Altium's 3D view, Nov 17.</figcaption>
+  </figure>
+</div>
+
+<h2 class="display" id="connectors">Connectors</h2>
+<p class="byline">Power, the sensor and the CAN bus come onto the board through four connectors.</p>
+
+<div class="split">
+  <figure id="fig-2">
+    <div class="im line"><a class="zoom" href="../assets/img/w_io.webp"><img loading="lazy" src="../assets/img/w_io.webp" width="610" height="1140" alt="Schematic of the CAN connectors, the 12 V power connector and the sensor connector"></a></div>
+    <figcaption><b>Fig. 2</b>Connector sheet, Nov 17: CAN, external power, and sensor input.</figcaption>
+  </figure>
+  <div class="prose">
+    <p><b>Power.</b> J1 brings in 12 V and ground <a class="ref" href="#fig-2">Fig. 2</a>.</p>
+    <p><b>Sensor.</b> J2 gives the sensor 5 V and ground, and its second pin carries the sensor signal to the microcontroller.</p>
+    <p><b>CAN.</b> CAN_1 and CAN_2 are wired pin for pin, with CAN_H and CAN_L tapped off to the transceiver, so the bus passes straight through the board.</p>
+  </div>
+</div>
+
+<h2 class="display" id="layout">PCB layout</h2>
+<p class="byline">Rev 1, Nov 17, 2026, in Altium Designer.</p>
+
+<div class="split wide-fig">
+  <figure id="fig-3">
+    <div class="im"><a class="zoom" href="../assets/img/w_layout.webp"><img loading="lazy" src="../assets/img/w_layout.webp" srcset="../assets/img/w_layout-800.webp 800w, ../assets/img/w_layout.webp 1324w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 640px" width="1324" height="1320" alt="Routed two-layer PCB layout of the wheel speed board in Altium"></a></div>
+    <figcaption><b>Fig. 3</b>The routed board, Nov 17. Red is top copper, blue is bottom copper, and yellow is silkscreen.</figcaption>
+  </figure>
+  <div class="prose">
+    <p class="lead">Two layers, 1.9 by 1.9 in, with all 26 parts on the top side.</p>
+    <p>The under-glow board is four layers and 2.8 by 2.8 in, so this board has half the layers and under half the area.</p>
+    <p>Power and the sensor come in on the left edge at J1 and J2. The microcontroller is in the middle, the two CAN connectors are along the bottom edge, and the programming header P1 is on the right <a class="ref" href="#fig-3">Fig. 3</a>.</p>
+    <p><b>Next.</b> Rev 2 will be smaller than Rev 1.</p>
+  </div>
+</div>
+
+<nav class="next" aria-label="More projects"><div><span>Previous</span><a href="bolt-underglow.html">BOLT under-glow controller board</a></div></nav>
+</article>
+</main>
+<footer class="tb"><div class="cells">
+  <span><b>Derek Zhuang</b>Engineering portfolio</span>
+  <span>BOLT wheel speed sensor board</span>
+  <span>Updated Nov 2026. <a href="https://drive.google.com/file/d/1knBHxL6q7wfWigkeNkA8Oi-ZfvWAPpQj/view">PDF version</a></span>
+</div></footer>
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>

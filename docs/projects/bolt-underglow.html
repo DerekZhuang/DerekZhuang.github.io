@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BOLT under-glow controller board | Derek (Ziheng) Zhuang</title>
-<meta name="description" content="An LED controller board on the bike&#x27;s CAN bus: two schematic revisions, a design review that found three problems, and a four-layer layout routed to zero design rule violations. Fabrication is planned for the end of November. A second board, for wheel speed sensing, has its first layout done.">
+<meta name="description" content="An LED controller board on the bike&#x27;s CAN bus: two schematic revisions, a design review that found three problems, and a four-layer layout routed to zero design rule violations. Fabrication is planned for the end of November.">
 <meta property="og:title" content="BOLT under-glow controller board | Derek (Ziheng) Zhuang">
-<meta property="og:description" content="An LED controller board on the bike&#x27;s CAN bus: two schematic revisions, a design review that found three problems, and a four-layer layout routed to zero design rule violations. Fabrication is planned for the end of November. A second board, for wheel speed sensing, has its first layout done.">
+<meta property="og:description" content="An LED controller board on the bike&#x27;s CAN bus: two schematic revisions, a design review that found three problems, and a four-layer layout routed to zero design rule violations. Fabrication is planned for the end of November.">
 <meta property="og:image" content="https://derekzhuang.github.io/assets/img/b_layout.jpg">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../assets/css/site.css">
@@ -29,7 +29,7 @@
     <header class="page-head">
   <h1 class="display">BOLT under-glow controller board</h1>
   <p class="byline">BOLT Controls, Virginia Tech's electric motorcycle team. Project started in October 2026, with the schematic and PCB layout done in Altium Designer.</p>
-  <nav class="onpage" aria-label="On this page"><span>On this page</span><a href="#schematic">Schematic</a><a href="#review">Design review</a><a href="#layout">PCB layout</a><a href="#wheel-speed">Wheel speed board</a></nav>
+  <nav class="onpage" aria-label="On this page"><span>On this page</span><a href="#schematic">Schematic</a><a href="#review">Design review</a><a href="#layout">PCB layout</a></nav>
 </header>
     <div class="prose">
       <p>On BOLT's Controls subteam I took on the under-glow board, which drives addressable LED strips on the bike and connects to its CAN bus. It extends the RGB lighting work I did for my dorm. My first Altium board was a guided 7-segment display tutorial that was never fabricated.</p>
@@ -118,27 +118,12 @@
   </div>
   <div class="prose">
     <p>I also added a 15 mil board outline clearance rule to keep copper away from the edge. To be sure the rule was actually running, I set it to 200 mil first and got 70 violations, then set it back to 15 mil and reran the check to zero.</p>
-    <p><b>Next.</b> Check every layer of the Gerbers in the fabricator's viewer before ordering. Fabrication is planned for the end of November, with installation on the bike in early December. The wheel speed board below reuses this base.</p>
+    <p><b>Next.</b> Check every layer of the Gerbers in the fabricator's viewer before ordering. Fabrication is planned for the end of November, with installation on the bike in early December. My <a href="bolt-wheel-speed.html">wheel speed board</a> reuses this base.</p>
   </div>
 </div>
 
-<h2 class="display" id="wheel-speed">Wheel speed board</h2>
-<p class="byline">My second BOLT Controls board, built on the same base as the under-glow board. Rev 1 layout completed in Altium Designer on Nov 17, 2026.</p>
 
-<div class="split wide-fig">
-  <figure id="fig-7">
-    <div class="im line"><a class="zoom" href="../assets/img/w_board.webp"><img loading="lazy" src="../assets/img/w_board.webp" width="940" height="978" alt="3D view of the routed two-layer wheel speed board in Altium"></a></div>
-    <figcaption><b>Fig. 7</b>Rev 1 of the wheel speed board in Altium's 3D view, Nov 17.</figcaption>
-  </figure>
-  <div class="prose">
-    <p class="lead">Two layers, 1.9 by 1.9 in, with all 26 parts on the top side.</p>
-    <p>The board reads the wheel's Hall effect speed sensor and puts the readings on the bike's CAN bus. It runs the same STM32C092RCT6 as the under-glow board.</p>
-    <p>The microcontroller sits in the middle, the two CAN connectors are along the bottom edge, and the programming header is on the right <a class="ref" href="#fig-7">Fig. 7</a>. Rev 1 is fully routed.</p>
-    <p><b>Next.</b> Rev 2 will be smaller than Rev 1.</p>
-  </div>
-</div>
-
-<nav class="next" aria-label="More projects"><div><span>Previous</span><a href="robot-electrical.html">2026 robot electrical system</a></div><div class="fwd"><span>Next</span><a href="turret.html">Turret wire management</a></div></nav>
+<nav class="next" aria-label="More projects"><div><span>Previous</span><a href="hatch.html">Hatch, a full-stack marketplace</a></div><div class="fwd"><span>Next</span><a href="bolt-wheel-speed.html">BOLT wheel speed sensor board</a></div></nav>
 </article>
 </main>
 <footer class="tb"><div class="cells">

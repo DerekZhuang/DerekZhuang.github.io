@@ -1,0 +1,44 @@
+<div class="opener" id="board">
+  <div class="opener-text">
+    <!--head-->
+    <div class="prose">
+      <p>My second board on BOLT's Controls subteam. It reads a Hall effect wheel speed sensor and puts the readings on the bike's CAN bus.</p>
+      <p>It is built on the same base as the <a href="bolt-underglow.html">under-glow board</a>, with the same STM32C092RCT6 microcontroller and the power and microcontroller sheets I drew for that board. Rev 1 is fully routed <span class="ref">Fig. 1</span>.</p>
+    </div>
+  </div>
+  <figure>
+    <div class="im line"><a class="zoom" href="../assets/img/w_board.jpg"><img src="../assets/img/w_board.jpg" width="940" height="978" alt="3D view of the routed two-layer wheel speed board in Altium"></a></div>
+    <figcaption><b>Fig. 1</b>Rev 1 in Altium's 3D view, Nov 17.</figcaption>
+  </figure>
+</div>
+
+<h2 class="display" id="connectors">Connectors</h2>
+<p class="byline">Power, the sensor and the CAN bus come onto the board through four connectors.</p>
+
+<div class="split">
+  <figure>
+    <div class="im line"><a class="zoom" href="../assets/img/w_io.png"><img loading="lazy" src="../assets/img/w_io.png" width="610" height="1140" alt="Schematic of the CAN connectors, the 12 V power connector and the sensor connector"></a></div>
+    <figcaption><b>Fig. 2</b>Connector sheet, Nov 17: CAN, external power, and sensor input.</figcaption>
+  </figure>
+  <div class="prose">
+    <p><b>Power.</b> J1 brings in 12 V and ground <span class="ref">Fig. 2</span>.</p>
+    <p><b>Sensor.</b> J2 gives the sensor 5 V and ground, and its second pin carries the sensor signal to the microcontroller.</p>
+    <p><b>CAN.</b> CAN_1 and CAN_2 are wired pin for pin, with CAN_H and CAN_L tapped off to the transceiver, so the bus passes straight through the board.</p>
+  </div>
+</div>
+
+<h2 class="display" id="layout">PCB layout</h2>
+<p class="byline">Rev 1, Nov 17, 2026, in Altium Designer.</p>
+
+<div class="split wide-fig">
+  <figure>
+    <div class="im"><a class="zoom" href="../assets/img/w_layout.png"><img loading="lazy" src="../assets/img/w_layout.png" width="1324" height="1320" alt="Routed two-layer PCB layout of the wheel speed board in Altium"></a></div>
+    <figcaption><b>Fig. 3</b>The routed board, Nov 17. Red is top copper, blue is bottom copper, and yellow is silkscreen.</figcaption>
+  </figure>
+  <div class="prose">
+    <p class="lead">Two layers, 1.9 by 1.9 in, with all 26 parts on the top side.</p>
+    <p>The under-glow board is four layers and 2.8 by 2.8 in, so this board has half the layers and under half the area.</p>
+    <p>Power and the sensor come in on the left edge at J1 and J2. The microcontroller is in the middle, the two CAN connectors are along the bottom edge, and the programming header P1 is on the right <span class="ref">Fig. 3</span>.</p>
+    <p><b>Next.</b> Rev 2 will be smaller than Rev 1.</p>
+  </div>
+</div>
