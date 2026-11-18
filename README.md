@@ -16,7 +16,7 @@ Static site for GitHub Pages. The published site is everything in `docs/`.
 
 To add or replace a figure: put the original in `src/img/`, run `python3 make_images.py` (needs `pip install pillow`), then `python3 build.py`. Pages keep naming the original file, such as `../assets/img/p1_wiring.jpg`, and the build points them at the WebP versions. A figure shown wider than half the window needs its own `sizes="..."` on the `<img>` (see `b_buck.png` on the BOLT page).
 
-The graduation year on the home page is `CLASS_YEAR` in `build.py`.
+The home page byline (major and class standing) is `STANDING` in `build.py`.
 
 The first entry in `PROJECTS` is the lead project: it gets the large photo at the top of the home page. To make BOLT the lead once the board is fabricated, move its entry to the top and rebuild.
 

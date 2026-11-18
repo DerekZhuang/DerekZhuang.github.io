@@ -24,7 +24,7 @@ IMAGES = json.loads((ROOT / "src" / "img" / "manifest.json").read_text(encoding=
 # How wide a figure is on screen, for choosing between the image sizes. A figure
 # that is shown wider than half the window carries its own sizes="..." in the page.
 DEFAULT_SIZES = "(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 640px"
-CLASS_YEAR = "class of 2029"
+STANDING = "Electrical Engineering sophomore at Virginia Tech"
 # Home page sections, in order. Each project names its group in PROJECTS.
 GROUPS = [("robotics", "Robotics"), ("other", "Other"), ("boards", "Boards")]
 
@@ -194,7 +194,7 @@ def build_home():
 <section class="hero">
   <div class="who">
     <h1 class="display">{NAME}</h1>
-    <p class="byline">Electrical engineering student at Virginia Tech, {CLASS_YEAR}</p>
+    <p class="byline">{STANDING}</p>
     <div class="prose"><p class="lead">{INTRO}</p></div>
     <div class="contact">
       <a href="mailto:{EMAIL}">{EMAIL}</a>
