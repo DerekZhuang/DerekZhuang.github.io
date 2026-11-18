@@ -26,7 +26,7 @@ IMAGES = json.loads((ROOT / "src" / "img" / "manifest.json").read_text(encoding=
 DEFAULT_SIZES = "(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 640px"
 STANDING = "Electrical Engineering sophomore at Virginia Tech"
 # Home page sections, in order. Each project names its group in PROJECTS.
-GROUPS = [("robotics", "Robotics"), ("other", "Other"), ("boards", "Boards")]
+GROUPS = [("boards", "Boards"), ("robotics", "Robotics"), ("other", "Other")]
 
 NAME = "Derek (Ziheng) Zhuang"
 SHORT_NAME = "Derek Zhuang"
@@ -39,6 +39,27 @@ UPDATED = "Nov 2026"
 SITE_URL = "https://derekzhuang.github.io"
 
 PROJECTS = [
+    {
+        "group": "Boards",
+        "slug": "bolt-underglow",
+        "title": "BOLT under-glow controller board",
+        "where": "BOLT at Virginia Tech, started October 2026",
+        "byline": "BOLT Controls, Virginia Tech's electric motorcycle team. Project started in October 2026, with the schematic and PCB layout done in Altium Designer.",
+        "summary": "An LED controller board on the bike's CAN bus: two schematic revisions, a design review that found three problems, and a four-layer layout routed to zero design rule violations. Fabrication is planned for the end of November.",
+        "thumb": "b_layout.jpg", "thumb_size": (1390, 1389), "thumb_pos": "50% 50%",
+        "thumb_alt": "Routed four-layer PCB layout of the under-glow board",
+        "sections": [("schematic", "Schematic"), ("review", "Design review"), ("layout", "PCB layout")],
+    },
+    {
+        "group": "Boards",
+        "slug": "bolt-wheel-speed",
+        "title": "BOLT wheel speed sensor board",
+        "where": "BOLT at Virginia Tech, started October 2026",
+        "byline": "BOLT Controls, Virginia Tech's electric motorcycle team. Project started in October 2026, with the schematic and PCB layout done in Altium Designer.",
+        "summary": "A second CAN board for the bike, built on the under-glow board's base: it reads a Hall effect wheel speed sensor and reports over CAN. Rev 1 is a fully routed two-layer, 1.9 in square board.",
+        "thumb": "w_board.jpg", "thumb_size": (940, 978), "thumb_pos": "50% 50%", "thumb_line": True,
+        "thumb_alt": "3D view of the routed wheel speed board",
+    },
     {
         "group": "Robotics",
         "slug": "robot-electrical",
@@ -80,27 +101,6 @@ PROJECTS = [
         "summary": "A Node.js and SQLite backend with no npm dependencies, a 14-table schema with the task lifecycle enforced in the database, and a server-side AI intake assistant.",
         "thumb": "h_intake.jpg", "thumb_size": (1600, 887), "thumb_pos": "50% 0%", "thumb_line": True,
         "thumb_alt": "Hatch intake page",
-    },
-    {
-        "group": "Boards",
-        "slug": "bolt-underglow",
-        "title": "BOLT under-glow controller board",
-        "where": "BOLT at Virginia Tech, started October 2026",
-        "byline": "BOLT Controls, Virginia Tech's electric motorcycle team. Project started in October 2026, with the schematic and PCB layout done in Altium Designer.",
-        "summary": "An LED controller board on the bike's CAN bus: two schematic revisions, a design review that found three problems, and a four-layer layout routed to zero design rule violations. Fabrication is planned for the end of November.",
-        "thumb": "b_layout.jpg", "thumb_size": (1390, 1389), "thumb_pos": "50% 50%",
-        "thumb_alt": "Routed four-layer PCB layout of the under-glow board",
-        "sections": [("schematic", "Schematic"), ("review", "Design review"), ("layout", "PCB layout")],
-    },
-    {
-        "group": "Boards",
-        "slug": "bolt-wheel-speed",
-        "title": "BOLT wheel speed sensor board",
-        "where": "BOLT at Virginia Tech, started October 2026",
-        "byline": "BOLT Controls, Virginia Tech's electric motorcycle team. Project started in October 2026, with the schematic and PCB layout done in Altium Designer.",
-        "summary": "A second CAN board for the bike, built on the under-glow board's base: it reads a Hall effect wheel speed sensor and reports over CAN. Rev 1 is a fully routed two-layer, 1.9 in square board.",
-        "thumb": "w_board.jpg", "thumb_size": (940, 978), "thumb_pos": "50% 50%", "thumb_line": True,
-        "thumb_alt": "3D view of the routed wheel speed board",
     },
 ]
 

@@ -7,7 +7,7 @@
 <meta name="description" content="Engineering portfolio of Derek Zhuang, electrical engineering student at Virginia Tech: robot electrical systems, PCB design, and wire management.">
 <meta property="og:title" content="Derek (Ziheng) Zhuang">
 <meta property="og:description" content="Engineering portfolio of Derek Zhuang, electrical engineering student at Virginia Tech: robot electrical systems, PCB design, and wire management.">
-<meta property="og:image" content="https://derekzhuang.github.io/assets/img/p1_wiring.jpg">
+<meta property="og:image" content="https://derekzhuang.github.io/assets/img/b_layout.jpg">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
@@ -32,18 +32,39 @@
       <a href="https://www.linkedin.com/in/derek-zhuang-6246352b1">linkedin.com/in/derek-zhuang-6246352b1</a>
     </div>
   </div>
-  <a class="project feature" href="projects/robot-electrical.html">
-    <div class="thumb"><img src="assets/img/p1_wiring.webp" srcset="assets/img/p1_wiring-800.webp 800w, assets/img/p1_wiring-1200.webp 1200w, assets/img/p1_wiring.webp 1520w" width="1520" height="1430" alt="Underside of the 2026 robot with its wiring, power distribution hub and fuse panels" style="object-position:58% 50%;" sizes="(max-width: 820px) 100vw, 58vw" fetchpriority="high"></div>
+  <a class="project feature" href="projects/bolt-underglow.html">
+    <div class="thumb"><img src="assets/img/b_layout.webp" srcset="assets/img/b_layout-800.webp 800w, assets/img/b_layout.webp 1390w" width="1390" height="1389" alt="Routed four-layer PCB layout of the under-glow board" style="object-position:50% 50%;" sizes="(max-width: 820px) 100vw, 58vw" fetchpriority="high"></div>
     <div class="words">
-      <h2>2026 robot electrical system</h2>
-      <div class="where">FRC Team 6560, 2026 season</div>
-      <p class="sum">I wired the whole robot on 12 AWG copper-clad aluminum after checking the rules, and split CAN into two buses so a mechanism fault cannot take down the drivetrain. That split kept us playing defense when a crushed wire took out the mechanism bus.</p>
+      <h2>BOLT under-glow controller board</h2>
+      <div class="where">BOLT at Virginia Tech, started October 2026</div>
+      <p class="sum">An LED controller board on the bike&#x27;s CAN bus: two schematic revisions, a design review that found three problems, and a four-layer layout routed to zero design rule violations. Fabrication is planned for the end of November.</p>
     </div>
   </a>
+</section>
+<section class="more" id="boards">
+  <h2>Boards</h2>
+  <ul class="work">
+  <li><a class="project" href="projects/bolt-wheel-speed.html">
+    <div class="thumb line"><img src="assets/img/w_board.webp" width="940" height="978" alt="3D view of the routed wheel speed board" loading="lazy"></div>
+    <div class="words">
+      <h3>BOLT wheel speed sensor board</h3>
+      <div class="where">BOLT at Virginia Tech, started October 2026</div>
+      <p class="sum">A second CAN board for the bike, built on the under-glow board&#x27;s base: it reads a Hall effect wheel speed sensor and reports over CAN. Rev 1 is a fully routed two-layer, 1.9 in square board.</p>
+    </div>
+  </a></li>
+  </ul>
 </section>
 <section class="more" id="robotics">
   <h2>Robotics</h2>
   <ul class="work">
+  <li><a class="project" href="projects/robot-electrical.html">
+    <div class="thumb"><img src="assets/img/p1_wiring.webp" srcset="assets/img/p1_wiring-800.webp 800w, assets/img/p1_wiring-1200.webp 1200w, assets/img/p1_wiring.webp 1520w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 640px" width="1520" height="1430" alt="Underside of the 2026 robot with its wiring, power distribution hub and fuse panels" loading="lazy"></div>
+    <div class="words">
+      <h3>2026 robot electrical system</h3>
+      <div class="where">FRC Team 6560, 2026 season</div>
+      <p class="sum">I wired the whole robot on 12 AWG copper-clad aluminum after checking the rules, and split CAN into two buses so a mechanism fault cannot take down the drivetrain. That split kept us playing defense when a crushed wire took out the mechanism bus.</p>
+    </div>
+  </a></li>
   <li><a class="project" href="projects/turret.html">
     <div class="thumb"><img src="assets/img/p2_v2.webp" srcset="assets/img/p2_v2-800.webp 800w, assets/img/p2_v2-1200.webp 1200w, assets/img/p2_v2.webp 1500w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 640px" width="1500" height="1141" alt="Turret on the 2026 robot with the V2 wire routing channel and cable sleeve" loading="lazy"></div>
     <div class="words">
@@ -71,27 +92,6 @@
       <h3>Hatch, a full-stack marketplace</h3>
       <div class="where">A friend&#x27;s startup, July to August 2026</div>
       <p class="sum">A Node.js and SQLite backend with no npm dependencies, a 14-table schema with the task lifecycle enforced in the database, and a server-side AI intake assistant.</p>
-    </div>
-  </a></li>
-  </ul>
-</section>
-<section class="more" id="boards">
-  <h2>Boards</h2>
-  <ul class="work">
-  <li><a class="project" href="projects/bolt-underglow.html">
-    <div class="thumb"><img src="assets/img/b_layout.webp" srcset="assets/img/b_layout-800.webp 800w, assets/img/b_layout.webp 1390w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 640px" width="1390" height="1389" alt="Routed four-layer PCB layout of the under-glow board" loading="lazy"></div>
-    <div class="words">
-      <h3>BOLT under-glow controller board</h3>
-      <div class="where">BOLT at Virginia Tech, started October 2026</div>
-      <p class="sum">An LED controller board on the bike&#x27;s CAN bus: two schematic revisions, a design review that found three problems, and a four-layer layout routed to zero design rule violations. Fabrication is planned for the end of November.</p>
-    </div>
-  </a></li>
-  <li><a class="project" href="projects/bolt-wheel-speed.html">
-    <div class="thumb line"><img src="assets/img/w_board.webp" width="940" height="978" alt="3D view of the routed wheel speed board" loading="lazy"></div>
-    <div class="words">
-      <h3>BOLT wheel speed sensor board</h3>
-      <div class="where">BOLT at Virginia Tech, started October 2026</div>
-      <p class="sum">A second CAN board for the bike, built on the under-glow board&#x27;s base: it reads a Hall effect wheel speed sensor and reports over CAN. Rev 1 is a fully routed two-layer, 1.9 in square board.</p>
     </div>
   </a></li>
   </ul>
