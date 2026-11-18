@@ -51,10 +51,10 @@ PROJECTS = [
         "title": "BOLT under-glow controller board",
         "where": "BOLT at Virginia Tech, started October 2026",
         "byline": "BOLT Controls, Virginia Tech's electric motorcycle team. Project started in October 2026, with the schematic and PCB layout done in Altium Designer.",
-        "summary": "An LED controller board on the bike's CAN bus: two schematic revisions, a design review that found three problems, and a four-layer layout routed to zero design rule violations. Fabrication is planned for the end of November.",
+        "summary": "An LED controller board on the bike's CAN bus: two schematic revisions, a design review that found three problems, and a four-layer layout routed to zero design rule violations. Fabrication is planned for the end of November. A second board, for wheel speed sensing, has its first layout done.",
         "thumb": "b_layout.jpg", "thumb_size": (1390, 1389), "thumb_pos": "50% 50%",
         "thumb_alt": "Routed four-layer PCB layout of the under-glow board",
-        "sections": [("schematic", "Schematic"), ("review", "Design review"), ("layout", "PCB layout")],
+        "sections": [("schematic", "Schematic"), ("review", "Design review"), ("layout", "PCB layout"), ("wheel-speed", "Wheel speed board")],
     },
     {
         "slug": "turret",
@@ -92,7 +92,7 @@ INTRO = (
     "electronics go. I was Electrical Lead on FRC Team 6560 for 2025-26 and now mentor the team. I also drive and "
     "run electrical and battery systems for an H2GP hydrogen fuel-cell race car. On the Controls subteam at BOLT, "
     "Virginia Tech's electric motorcycle team, I am designing an "
-    '<a href="projects/bolt-underglow.html">LED controller board</a>, and I am working toward PCB and chip design.'
+    '<a href="projects/bolt-underglow.html">LED controller board</a> and a <a href="projects/bolt-underglow.html#wheel-speed">wheel speed sensor board</a>, and I am working toward PCB and chip design.'
 )
 
 
